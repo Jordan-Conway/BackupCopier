@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class BackupMaker extends Thread{
+//TODO add customisable sleep()
 
+public class BackupMaker extends Thread{
 
     private File save;
     private Long lastModified;
@@ -13,6 +14,16 @@ public class BackupMaker extends Thread{
     private final String filePath;
     private final String backupPath;
 
+    /**
+     * This object stores two file paths which are used to copy a file/folder.
+     * <p>
+     * By default, a back-up is performed every 15 minutes.
+     * <p>
+     * If the object is interrupted, it will automatically call the backup() method.
+     *
+     * @param filePath the file/folder to be backed up
+     * @param backupPath the path to which the file/folder should be copied to
+     */
     public BackupMaker(String filePath, String backupPath){
         this.save = new File(filePath);
         this.lastModified = save.lastModified();
@@ -21,6 +32,11 @@ public class BackupMaker extends Thread{
         this.backupPath = backupPath;
     }
 
+    /**
+     * Copies file/folder to the backup.
+     *
+     * @throws IOException if File cannot be found
+     */
     public void backup() throws IOException{
         save = new File(this.filePath);
         File backup = new File(backupPath);
@@ -28,6 +44,11 @@ public class BackupMaker extends Thread{
         this.lastModified = this.currentModified;
     }
 
+    /**
+     * The BackupMaker creates a backup and then proceeds to wait.
+     * <p>
+     * If it is interrupted, it creates a backup and stops looping.
+     */
     public void begin(){
         while(true){
             try{
