@@ -1,18 +1,14 @@
 public class App {
-    //TODO pass filePath and backupPath as arguments
-
-    public static String filePath = "C:\\Users\\AmazedAlloy\\AppData\\Roaming\\.minecraft\\saves\\Survival";
-    public static String backupPath = "C:\\Users\\AmazedAlloy\\OneDrive\\Minecraft Worlds\\Survival-Backup";
 
     public static void main(String[] args) {
         App app = new App();
-        app.start();
+        app.start(args);
     }
 
-    public void start(){
-        final BackupMaker backupMaker = new BackupMaker(filePath, backupPath);
+    public void start(String[] args){
+        final BackupMaker backupMaker = new BackupMaker(args[0], args[1]);
         Thread quitHook = new Thread(() -> {
-            System.out.println("Triggered hook");
+            System.out.println("Triggered quit hook");
             backupMaker.interrupt();
         });
 
