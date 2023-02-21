@@ -39,7 +39,9 @@ public class BackupMaker extends Thread{
      */
     public void backup() throws IOException{
         save = new File(this.filePath);
+        System.out.println(save);
         File backup = new File(backupPath);
+        System.out.println(backup);
         FileUtils.copyDirectory(save, backup);
         this.lastModified = this.currentModified;
     }
@@ -50,6 +52,13 @@ public class BackupMaker extends Thread{
      * If it is interrupted, it creates a backup and stops looping.
      */
     public void begin(){
+        try{
+            this.backup();
+        }
+        catch(IOException e){
+            System.out.println("IOException on startup");
+        }
+
         while(true){
             try{
                 this.currentModified = this.save.lastModified();

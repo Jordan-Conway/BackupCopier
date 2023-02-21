@@ -2,7 +2,7 @@ public class App {
     //TODO pass filePath and backupPath as arguments
 
     public static String filePath = "C:\\Users\\AmazedAlloy\\AppData\\Roaming\\.minecraft\\saves\\Survival";
-    public static String backupPath = "C:\\Users\\AmazedAlloy\\OneDrive\\Minecraft Worlds";
+    public static String backupPath = "C:\\Users\\AmazedAlloy\\OneDrive\\Minecraft Worlds\\Survival-Backup";
 
     public static void main(String[] args) {
         App app = new App();
